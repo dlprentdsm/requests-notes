@@ -43,3 +43,17 @@ br.submit()
 
 print br.response().read()
 ```
+
+Passing between selenium and requests, worst case scenario:
+First you have to get the cookies from your driver instance:
+
+```cookies = driver.get_cookies()```
+This returns a set of cookie dictionaries for your session.
+
+Next, set those cookies in requests:
+
+```
+s = requests.Session()
+for cookie in cookies:
+    s.cookies.set(cookie['name'], cookie['value'])
+```
